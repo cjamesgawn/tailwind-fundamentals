@@ -135,13 +135,13 @@ The maxWidth is requried. Aswell as the default padding. Padding is applied on t
 
 ```js file=tailwind.config.js
 module.exports = {
-	theme: {
-		extend: {
-			screens: {
-				sm: '782px',
-			},
-		},
-	},
+theme: {
+extend: {
+screens: {
+sm: '782px',
+},
+},
+},
 };
 ```
 
