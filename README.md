@@ -55,6 +55,7 @@ that adapt to the viewport width, allowing for a responsive typography experienc
 
 #### Configuration
 
+```js
 @param {number|string} minValue - The minimum font size. If an integer is provided, it is assumed to be in pixels.
 If a string is provided with a `rem` suffix, it will be treated as such.
 @param {number|string} maxValue - The maximum font size. Similar to `minValue`, can be provided as an integer or a `rem` value.
@@ -76,14 +77,15 @@ Same format as `minWidth`.
   - `fontWeight`: The specified font weight.
 
 module.exports = {
-theme: {
-extend: {
-fontSize: {
-h1: tailwindFundamentals.fluidType(30, 40, 36, 46, 0, 400, 320, 1920),
-},
-},
-},
+  theme: {
+    extend: {
+      fontSize: {
+        h1: tailwindFundamentals.fluidType(30, 40, 36, 46, 0, 400, 320, 1920),
+      },
+    },
+  },
 };
+```
 
 ```js file=tailwind.config.js
 module.exports = {
