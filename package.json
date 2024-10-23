@@ -1,0 +1,22 @@
+{
+	"name": "@cjamesgawn/tailwind-fundamentals",
+	"version": "1.0.2",
+	"description": "A Tailwind CSS plugin that can be used to extend the functionality of Tailwind CSS.",
+	"repository": "github:cjamesgawn/tailwind-fundamentals",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"tailwind",
+		"css",
+		"tailwind",
+		"plugin",
+		"fundamentals"
+	],
+	"author": "cjamesgawn",
+	"license": "SEE LICENSE IN ./LICENSE",
+	"devDependencies": {
+		"tailwindcss": "^3.4.14"
+	}
+}
