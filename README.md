@@ -38,14 +38,76 @@ const tailwindFundamentals = require('@cjamesgawn/tailwind-fundamentals');
 
 ### Fluid Typography
 
-#### Usage
-
 **Fluid Typography** calculates fluid typography settings for responsive design.
 
 This function generates CSS clamp values for fluid font sizes and line heights
 that adapt to the viewport width, allowing for a responsive typography experience.
 
-#### Examples
+#### Configuration & Usage
+
+##### Configuration Parameters
+
+- **`minValue`** (`number|string`):
+
+  - The minimum font size.
+  - If provided as an integer, it is assumed to be in pixels.
+  - If provided as a string with a `rem` suffix, it will be treated as such.
+
+- **`maxValue`** (`number|string`):
+
+  - The maximum font size.
+  - Similar to `minValue`, it can be provided as an integer (pixels) or as a `rem` value.
+
+- **`minLineHeight`** (`number|string`):
+
+  - The minimum line height value.
+  - Accepts integers (assumed to be in pixels) or `rem` values.
+
+- **`maxLineHeight`** (`number|string`):
+
+  - The maximum line height value.
+  - Follows the same format as `minLineHeight`.
+
+- **`letterSpacing`** (`string`, optional, default: `'0'`):
+
+  - The letter spacing to be applied.
+
+- **`fontWeight`** (`string`, optional, default: `'400'`):
+
+  - The font weight to be applied.
+
+- **`minWidth`** (`number|string`, optional, default: `320`):
+
+  - The minimum viewport width at which font scaling begins.
+  - Can be provided as an integer (pixels) or as a `rem`.
+
+- **`maxWidth`** (`number|string`, optional, default: `1920`):
+  - The maximum viewport width at which font scaling ends.
+  - Follows the same format as `minWidth`.
+
+##### Returns
+
+The function returns an array containing:
+
+- A string representing the CSS clamp function for the fluid font size.
+- An object with the following properties:
+  - **`lineHeight`**: A string for the clamp value of line height.
+  - **`letterSpacing`**: The specified letter spacing.
+  - **`fontWeight`**: The specified font weight.
+
+##### Example Usage
+
+```javascript
+module.exports = {
+	theme: {
+		extend: {
+			fontSize: {
+				h1: tailwindFundamentals.fluidType(30, 40, 36, 46, 0, 400, 320, 1920),
+			},
+		},
+	},
+};
+```
 
 ```html
 <!-- Example using fluid typography -->
@@ -53,56 +115,13 @@ that adapt to the viewport width, allowing for a responsive typography experienc
 <p class="text-copylg">Responsive Large Copy</p>
 ```
 
-#### Configuration
-
-```js
-@param {number|string} minValue - The minimum font size. If an integer is provided, it is assumed to be in pixels.
-If a string is provided with a `rem` suffix, it will be treated as such.
-@param {number|string} maxValue - The maximum font size. Similar to `minValue`, can be provided as an integer or a `rem` value.
-@param {number|string} minLineHeight - The minimum line height value. Accepts integers (assumed as pixels) or `rem` values.
-@param {number|string} maxLineHeight - The maximum line height value. Same format as `minLineHeight`.
-@param {string} [letterSpacing='0'] - The letter spacing to be applied. Defaults to `0`.
-@param {string} [fontWeight='400'] - The font weight to be applied. Defaults to `400`.
-@param {number|string} [minWidth=320] - The minimum viewport width at which font scaling begins. Defaults to `320`.
-Can be provided as an integer (assumed in pixels) or `rem`.
-@param {number|string} [maxWidth=1920] - The maximum viewport width at which font scaling ends. Defaults to `1920`.
-Same format as `minWidth`.
-
-@returns {[string, Object]} An array containing:
-
-- A string representing the CSS clamp function for the fluid font size.
-- An object with the following properties:
-  - `lineHeight`: A string for the clamp value of line height.
-  - `letterSpacing`: The specified letter spacing.
-  - `fontWeight`: The specified font weight.
-
-module.exports = {
-  theme: {
-    extend: {
-      fontSize: {
-        h1: tailwindFundamentals.fluidType(30, 40, 36, 46, 0, 400, 320, 1920),
-      },
-    },
-  },
-};
-```
-
-```js file=tailwind.config.js
-module.exports = {
-	theme: {
-		extend: {
-			fontSize: {
-				h1: tailwindFundamentals.fluidType(30, 40, 36, 46, 0, 600),
-				copylg: tailwindFundamentals.fluidType(18, 24, 22, 28),
-			},
-		},
-	},
-};
-```
-
 ### Containers
 
-#### Usage
+**Containers** adds container utility classes that allow for easy containerisation with responsive padding.
+
+#### Configuration & Usage
+
+##### Configuration
 
 For **Containers**, add the plugin in your `tailwind.config.js`:
 
@@ -111,17 +130,6 @@ module.exports = {
 	plugins: [tailwindFundamentals.containers],
 };
 ```
-
-#### Examples
-
-```html
-<!-- Example using containers -->
-<div class="container-md">
-	<!-- Content here will have a max-width of 1440px and padding values depending on the view width -->
-</div>
-```
-
-#### Configuration
 
 The maxWidth is requried. Aswell as the default padding. Padding is applied on the x-axis. The responsive paddings are optional and there can be as many as needed. The responsive paddings use paramenters set in the screens object in your `tailwind.config.js`:
 
@@ -144,15 +152,31 @@ module.exports = {
 	theme: {
 		containers: {
 			DEFAULT: [
-				'1440px', // maxWidth
+				'800px', // maxWidth
 				'1rem', // default padding
 				{
-					sm: '1rem', // responsive padding applied at 782px vw
+					sm: '2rem', // responsive padding applied at 782px vw
 				},
 			],
+      md: {
+        '1440px'
+        '2rem',
+      }
 		},
 	},
 };
+```
+
+##### Examples
+
+```html
+<!-- Example using containers -->
+<div class="container">
+	<!-- Content here will have a max-width of 800px and padding left and right of 1rem and 2rem after the 'sm' vw -->
+</div>
+<div class="container-md">
+	<!-- Content here will have a max-width of 1440px and padding left and right of 2rem -->
+</div>
 ```
 
 ### Pixelated Spacing
